@@ -23,6 +23,11 @@ services:
       - MYSQL_USER=mluser
       - MYSQL_PASSWORD=mlpass
       - MYSQL_DATABASE=ml_sales
+    restart: unless-stopped
+    volumes:
+      - ./models:/app/models
+      - ./data:/app/data
+      - ./reports:/app/reports
 
 volumes:
   db_data:

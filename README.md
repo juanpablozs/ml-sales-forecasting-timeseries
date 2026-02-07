@@ -67,4 +67,3 @@ Design notes:
 - Metrics: MAE, RMSE, sMAPE (symmetric and stable for values near zero).
 
 For more details see the `src/` modules and `reports/` produced by `make backtest`.
-# ml-sales-forecasting-timeseries
