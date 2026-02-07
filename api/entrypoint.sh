@@ -19,7 +19,19 @@ if [ ! -f "${MODEL}" ]; then
   echo "Model artifact not found. Training model..."
   python -m src.forecast.train --run
 else
-  echo "Model artifact found: ${MODEL}"
+  # If model exists, compare modification times to processed data; skip training
+  if [ -f "${DATA}" ]; then
+    model_mtime=$(stat -c %Y "${MODEL}" 2>/dev/null || stat -f %m "${MODEL}" 2>/dev/null || echo 0)
+    data_mtime=$(stat -c %Y "${DATA}" 2>/dev/null || stat -f %m "${DATA}" 2>/dev/null || echo 0)
+    if [ "${model_mtime}" -ge "${data_mtime}" ]; then
+      echo "Model is newer than processed data; skipping training."
+    else
+      echo "Model older than processed data; retraining model..."
+      python -m src.forecast.train --run
+    fi
+  else
+    echo "Processed data not present to compare timestamps; skipping retrain."
+  fi
 fi
 
 echo "Starting uvicorn..."

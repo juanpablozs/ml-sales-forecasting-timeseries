@@ -47,6 +47,26 @@ docker-compose build --pull --no-cache
 docker-compose up --force-recreate
 ```
 
+Docker notes:
+
+- The `api` service mounts `./data`, `./models`, and `./reports` from the host so artifacts persist across container restarts.
+- On container start the entrypoint will run ingestion and training only when needed: it skips retraining when the model artifact is newer than the processed data file.
+- If you want the container to always retrain, remove or edit `api/entrypoint.sh`.
+
+Example Docker flow:
+
+```bash
+# build and start in background
+docker-compose build
+docker-compose up -d
+
+# view api logs
+docker-compose logs -f api
+
+# stop and remove
+docker-compose down
+```
+
 API endpoints:
 
 - `GET /health` — health check
