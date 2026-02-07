@@ -13,7 +13,9 @@ services:
     volumes:
       - db_data:/var/lib/mysql
   api:
-    build: ./api
+    build:
+      context: .
+      dockerfile: api/Dockerfile
     depends_on:
       - db
     ports:
