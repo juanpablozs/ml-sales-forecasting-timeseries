@@ -16,3 +16,9 @@ def test_forecast_length():
     assert r.status_code == 200
     data = r.json()
     assert len(data['predictions']) == 5
+
+
+def test_model_info():
+    r = client.get('/model-info')
+    # model may not be present in some CI; accept 200 or 404
+    assert r.status_code in (200, 404)
