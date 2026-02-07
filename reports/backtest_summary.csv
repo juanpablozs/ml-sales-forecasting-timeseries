@@ -1,0 +1,2 @@
+train_end_idx,train_end_date,mae_ml,rmse_ml,smape_ml,mae_naive,mae_seasonal
+5,2023-01-06 00:00:00,28.0,28.442925306655784,19.801506936493784,30.0,25.0
