@@ -1,0 +1,13 @@
+__pycache__/
+.venv/
+env/
+.env
+.pytest_cache/
+dist/
+build/
+*.pyc
+data/raw/
+data/processed/
+reports/forecasts/
+models/
+*.sqlite3
